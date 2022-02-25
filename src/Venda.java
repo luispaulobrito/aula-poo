@@ -11,6 +11,10 @@ public class Venda {
 
     private List<Produto> listaProdutos = new ArrayList<Produto>();
 
+    public List<Produto> getListaProdutos() {
+        return listaProdutos;
+    }
+
     public Long getId() {
         return id;
     }
@@ -44,10 +48,31 @@ public class Venda {
     }
 
     public BigDecimal getValorTotal() {
+        this.valorTotal = BigDecimal.valueOf(totalVenda());
         return valorTotal;
     }
 
     public void setValorTotal(BigDecimal valorTotal) {
         this.valorTotal = valorTotal;
+    }
+
+    private double totalVenda(){
+        double total = 0.0;
+        for (Produto produto:listaProdutos) {
+            total+= produto.getValor().doubleValue();
+        }
+        return total;
+    }
+
+    @Override
+    public String toString() {
+        return "Venda{" +
+                "id=" + id +
+                ", descricaoVenda='" + descricaoVenda + '\'' +
+                ", nomeCliente='" + nomeCliente + '\'' +
+                ", enderecoEntrega='" + enderecoEntrega + '\'' +
+                ", valorTotal=" + valorTotal +
+                ", listaProdutos=" + listaProdutos +
+                '}';
     }
 }
